@@ -6,7 +6,7 @@
 
 数据太多？我们可以添加过滤条件，比如对于某一个端口发送UDP请求，我们要查看数据：`udp.port == 端口号`；或者说我们要查看这个ip下所有的流量：`ip.addr==IP号`。
 
-<p>
+<br>
 
 ### 2. DNS解析
 
@@ -22,7 +22,7 @@ DNS是**计算机域名系统 (Domain Name System 或Domain Name Service) **的�
 
 ​    考虑到效率原因，TCP连接的开销大得，故采用UDP作为DNS的运输层协议，这也将导致只有13个根域名服务器的结果。我们知道UDP数据包最大为512个字节，这也导致只有13个根域名服务器的结果。
 
-
+<br>
 
 #### 2.2 解析过程
 
@@ -48,7 +48,7 @@ DNS是**计算机域名系统 (Domain Name System 或Domain Name Service) **的�
 
 我们可以使用`nslookup`来查看解析步骤（也可以用它来判断DNS解析是否有效，如果DNS解析正常的话，会反馈回正确的IP地址。）：
 
-![4F917DFD-6B45-49E8-BAA4-BA833AB4448E](/Users/thinkive/Desktop/Study/MD/DNS解析/4F917DFD-6B45-49E8-BAA4-BA833AB4448E.png)
+![4F917DFD-6B45-49E8-BAA4-BA833AB4448E.png](https://upload-images.jianshu.io/upload_images/3261360-d6de9f2d7083065b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 Server：DNS服务器的主机名
 
@@ -58,13 +58,14 @@ Name：解析的URL
 
 Address：解析的IP
 
-
+<br>
 
 ### 3. 问题解决
 
 由于我们使用的是联通的服务器线路，在移动等其他设备上可能偶尔会存在解析失败或者运营商DNS劫持的情况。事实上，对应上线项目是需要服务器多运营商多地部署才是最合理的。
 
 对于解析失败的情况，我的处理是在APP内部内置一个默认IP，当然最好是后续每隔一段时间从服务器获取最新的映射，并覆盖本地的IP；在启动时，判断域名是否有效，有效则走正常流程，无效则使用默认IP去进行访问。
+判断代码如下：
 
 ```objective-c
 + (NSString *)getIPAddress:(NSString*) hostname{
@@ -93,6 +94,5 @@ Address：解析的IP
           return ipAddress;
       }
 ```
-
 
 
